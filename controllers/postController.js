@@ -4,7 +4,15 @@ class PostController {
   // @route  GET /api/posts
   // @desc   Get all posts
   // @access Private
-  async getAll(req, res) {}
+  async getAll(req, res) {
+    try {
+      const posts = await Post.findAll();
+
+      res.json(posts);
+    } catch (error) {
+      res.status(500).json(error.message);
+    }
+  }
   // @route  GET /api/posts/:id
   // @desc   Get single post
   // @access Private
