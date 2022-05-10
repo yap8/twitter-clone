@@ -2,14 +2,16 @@ const { User } = require('../models');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
+const generateToken = (payload) => {
+  return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' });
+};
+
 class UserController {
   // @route  POST /api/users/register
   // @desc   Register a new user
   // @access Public
   async register(req, res) {
     try {
-      console.log(User);
-
       const { email, username, password } = req.body;
 
       // validation
@@ -26,15 +28,11 @@ class UserController {
       const user = await User.create({ email, username, password: hash });
 
       // generate a token
-      const token = jwt.sign(
-        {
-          id: user.id,
-          email: user.email,
-          username: user.username,
-        },
-        process.env.JWT_SECRET,
-        { expiresIn: '24h' }
-      );
+      const token = generateToken({
+        id: user.id,
+        email: user.email,
+        username: user.username,
+      });
 
       // send response
       res.json(token);
