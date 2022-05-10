@@ -16,7 +16,17 @@ class PostController {
   // @route  GET /api/posts/:id
   // @desc   Get single post
   // @access Private
-  async getOne(req, res) {}
+  async getOne(req, res) {
+    try {
+      const { id } = req.params;
+
+      const post = await Post.findOne({ where: { id } });
+
+      res.json(post);
+    } catch (error) {
+      res.status(500).json(error.message);
+    }
+  }
   // @route  POST /api/posts
   // @desc   Create a post
   // @access Private
