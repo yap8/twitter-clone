@@ -43,7 +43,33 @@ class UserController {
   // @route  POST /api/users/login
   // @desc   Register a new user
   // @access Public
-  async login(req, res) {}
+  async login(req, res) {
+    try {
+      const { email, password } = req.body;
+
+      // check if user exists
+      const user = await User.findOne({ where: { email } });
+
+      if (!user) throw new Error('No user with such credentials');
+
+      // check if password match
+      const match = await bcrypt.compare(password, user.password);
+
+      if (!match) throw new Error('No user with such credentials');
+
+      // generate a token
+      const token = generateToken({
+        id: user.id,
+        email: user.email,
+        username: user.username,
+      });
+
+      // send response
+      res.json(token);
+    } catch (error) {
+      res.status(500).json(error.message);
+    }
+  }
 }
 
 module.exports = new UserController();
