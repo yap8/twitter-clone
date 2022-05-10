@@ -71,10 +71,16 @@ class UserController {
     }
   }
   // @route  GET /api/users/auth
-  // @desc   Test private route
+  // @desc   Update token
   // @access Private
-  async auth(req, res) {
-    res.json('authorized');
+  async updateToken(req, res) {
+    const token = generateToken({
+      id: req.user.id,
+      email: req.user.email,
+      username: req.user.username,
+    });
+
+    res.json(token);
   }
 }
 
