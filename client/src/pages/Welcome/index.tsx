@@ -4,19 +4,33 @@ import { Button, Fade, Modal } from '@mui/material';
 import { useState } from 'react';
 
 import SignupForm from '../../components/Form/SignupForm';
+import SigninForm from '../../components/Form/SigninForm';
 
 const Welcome: React.FC = () => {
-  const [open, setOpen] = useState(false);
-
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [signupOpen, setSignupOpen] = useState(false);
+  const [signinOpen, setSigninOpen] = useState(false);
 
   return (
     <section className="flex h-screen">
-      <Modal open={open} onClose={handleClose} closeAfterTransition>
-        <Fade in={open}>
+      <Modal
+        open={signupOpen}
+        onClose={() => setSignupOpen(false)}
+        closeAfterTransition
+      >
+        <Fade in={signupOpen}>
           <div>
-            <SignupForm handleClose={handleClose} />
+            <SignupForm handleClose={() => setSignupOpen(false)} />
+          </div>
+        </Fade>
+      </Modal>
+      <Modal
+        open={signinOpen}
+        onClose={() => setSigninOpen(false)}
+        closeAfterTransition
+      >
+        <Fade in={signinOpen}>
+          <div>
+            <SigninForm handleClose={() => setSigninOpen(false)} />
           </div>
         </Fade>
       </Modal>
@@ -53,14 +67,19 @@ const Welcome: React.FC = () => {
             className="w-full"
             variant="contained"
             size="large"
-            onClick={handleOpen}
+            onClick={() => setSignupOpen(true)}
           >
             Sign up with phone or email
           </Button>
           <h4 className="text-xl font-semibold mb-4 mt-10">
             Already have an account?
           </h4>
-          <Button className="w-full" variant="outlined" size="large">
+          <Button
+            className="w-full"
+            variant="outlined"
+            size="large"
+            onClick={() => setSigninOpen(true)}
+          >
             Sign in
           </Button>
         </div>
