@@ -13,6 +13,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// routes
+app.use('/api', require('./routes'));
+
 // start
 const start = async () => {
   try {
