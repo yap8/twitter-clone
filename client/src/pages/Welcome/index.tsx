@@ -22,10 +22,10 @@ const Welcome: React.FC = () => {
           className="text-blue-400 mb-14"
           style={{ fontSize: '3rem' }}
         />
-        <h1 className="text-6xl font-bold mb-14">Happening now</h1>
+        <h1 className="text-7xl font-bold mb-14">Happening now</h1>
         <p className="text-3xl font-bold mb-14">Join Twitter today.</p>
-        <div className="max-w-md">
-          <Button className="w-full" variant="contained" size="large">
+        <div className="max-w-sm">
+          <Button className="w-full" variant="outlined" size="large">
             <GoogleIcon className="mr-2" />
             Sign up with Google
           </Button>
