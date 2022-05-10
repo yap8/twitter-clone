@@ -6,11 +6,9 @@ const Post = sequelize.define(
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     text: { type: DataTypes.STRING },
-    user_id: { type: DataTypes.STRING },
   },
   {
     timestamps: true,
-    createdAt: 'created_at',
     updatedAt: false,
   }
 );
