@@ -14,3 +14,5 @@ const Post = sequelize.define(
     updatedAt: false,
   }
 );
+
+module.exports = Post;
