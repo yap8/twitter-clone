@@ -70,6 +70,12 @@ class UserController {
       res.status(500).json(error.message);
     }
   }
+  // @route  GET /api/users/auth
+  // @desc   Test private route
+  // @access Private
+  async auth(req, res) {
+    res.json('authorized');
+  }
 }
 
 module.exports = new UserController();
