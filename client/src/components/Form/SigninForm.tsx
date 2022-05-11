@@ -1,16 +1,33 @@
 import CloseIcon from '@mui/icons-material/Close';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Button, IconButton, TextField } from '@mui/material';
+import { useState } from 'react';
 
 interface SigninFormProps {
   handleClose: () => any;
 }
 
 const SigninForm: React.FC<SigninFormProps> = ({ handleClose }) => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    alert('SIGNIN');
+  };
+
   return (
     <form
       className="absolute top-1/2 left-1/2 w-full max-w-lg bg-white border rounded-xl p-2"
       style={{ transform: 'translate(-50%, -50%)' }}
+      onSubmit={handleSubmit}
     >
       <div className="flex">
         <div className="flex-1">
@@ -33,19 +50,28 @@ const SigninForm: React.FC<SigninFormProps> = ({ handleClose }) => {
             type="email"
             label="Email"
             variant="outlined"
+            value={formData.email}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-10">
           <TextField
             className="w-full"
-            name="name"
+            name="password"
             type="password"
             label="Password"
             variant="outlined"
+            value={formData.password}
+            onChange={handleChange}
           />
         </div>
         <div className="pb-10">
-          <Button className="w-full" variant="outlined" size="large">
+          <Button
+            type="submit"
+            className="w-full"
+            variant="outlined"
+            size="large"
+          >
             Create
           </Button>
         </div>
